@@ -48,7 +48,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<void> initBackgroundExecution() async {
-    final androidConfig =  FlutterBackgroundAndroidConfig(
+    final androidConfig = FlutterBackgroundAndroidConfig(
       notificationTitle: "flutter_background example app",
       notificationText:
           "Background notification for keeping the example app running in the background",
@@ -59,7 +59,10 @@ class _MyAppState extends State<MyApp> {
     );
     bool success =
         await FlutterBackground.initialize(androidConfig: androidConfig);
-
+    bool hasPermissions = await FlutterBackground.hasPermissions;
+    bool enabled = FlutterBackground.isBackgroundExecutionEnabled;
     debugPrint("$success");
+    debugPrint(" does have permission $hasPermissions");
+    debugPrint(" is bg enabled  $enabled");
   }
 }
