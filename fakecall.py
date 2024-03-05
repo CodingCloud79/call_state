@@ -4,17 +4,6 @@
 from twilio.rest import Client
 import time
 
-# Twilio Account SID and Auth Token
-# account_sid = 'AC7d3048c509cf77263ed2be9df2d6a557'
-account_sid = 'AC164e09bf9e2adcd16cecd0b97a868d86'
-# auth_token = '025998628223a6ccddbb3682031b5ef2'
-auth_token = '5de69ea3e4c8fb4d32a5e20841fbaa8f'
-
-# Twilio phone number
-from_number = 'your_twilio_phone_number'
-
-# Phone number to call (can be any valid phone number)
-to_number = 'recipient_phone_number'
 
 # Initialize Twilio client
 client = Client(account_sid, auth_token)
