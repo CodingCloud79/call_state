@@ -43,6 +43,7 @@ class _TrueCallerOverlayState extends State<TrueCallerOverlay> {
       color: Colors.transparent,
       child: Center(
         child: Container(
+          height: 500,
           padding: const EdgeInsets.symmetric(vertical: 12.0),
           width: double.infinity,
           decoration: BoxDecoration(
@@ -76,7 +77,7 @@ class _TrueCallerOverlayState extends State<TrueCallerOverlay> {
                         ),
                       ),
                       title: const Text(
-                        "X-SLAYER",
+                        "",
                         style: TextStyle(
                             fontSize: 20.0, fontWeight: FontWeight.bold),
                       ),
@@ -84,26 +85,26 @@ class _TrueCallerOverlayState extends State<TrueCallerOverlay> {
                     ),
                     const Spacer(),
                     const Divider(color: Colors.black54),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
-                              Text("+216 21065826"),
-                              Text("Last call - 1 min ago"),
-                            ],
-                          ),
-                          const Text(
-                            "Flutter Overlay",
-                            style: TextStyle(
-                                fontSize: 15.0, fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      ),
-                    )
+                    // Padding(
+                    //   padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                    //   child: Row(
+                    //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //     children: [
+                    //       Column(
+                    //         crossAxisAlignment: CrossAxisAlignment.start,
+                    //         children: const [
+                    //           Text("+216 21065826"),
+                    //           Text("Last call - 1 min ago"),
+                    //         ],
+                    //       ),
+                    //       const Text(
+                    //         "Flutter Overlay",
+                    //         style: TextStyle(
+                    //             fontSize: 15.0, fontWeight: FontWeight.bold),
+                    //       ),
+                    //     ],
+                    //   ),
+                    // )
                   ],
                 ),
                 Positioned(

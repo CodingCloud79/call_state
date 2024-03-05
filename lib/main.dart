@@ -38,6 +38,8 @@
 
 import 'dart:async';
 import 'dart:developer';
+import 'package:call_state/overlays/messanger_chathead.dart';
+import 'package:call_state/overlays/text_field_overlay.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_overlay_window/flutter_overlay_window.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -105,16 +107,7 @@ Future<void> phoneStateBackgroundCallbackHandler(
       log('Incoming call start, $number, duration: $duration s');
       break;
     case PhoneStateBackgroundEvent.incomingmissed:
-      FlutterOverlayWindow.showOverlay(
-        enableDrag: true,
-        overlayTitle: "X-SLAYER",
-        overlayContent: 'Overlay Enabled',
-        flag: OverlayFlag.defaultFlag,
-        visibility: NotificationVisibility.visibilityPublic,
-        positionGravity: PositionGravity.auto,
-        height: 400,
-        width: WindowSize.matchParent,
-      );
+       _showSystemAlertWindow(number);
       debugPrint('Incoming call missed, $number, duration: $duration s');
       log('Incoming call missed, $number, duration: $duration s');
       break;
@@ -123,16 +116,7 @@ Future<void> phoneStateBackgroundCallbackHandler(
       log('Incoming call received, $number, duration: $duration s');
       break;
     case PhoneStateBackgroundEvent.incomingend:
-      FlutterOverlayWindow.showOverlay(
-        enableDrag: true,
-        overlayTitle: "X-SLAYER",
-        overlayContent: 'Overlay Enabled',
-        flag: OverlayFlag.defaultFlag,
-        visibility: NotificationVisibility.visibilityPublic,
-        positionGravity: PositionGravity.auto,
-        height: 400,
-        width: WindowSize.matchParent,
-      );
+     _showSystemAlertWindow(number);
       debugPrint('Incoming call ended, $number, duration $duration s');
       log('Incoming call ended, $number, duration $duration s');
       break;
@@ -141,16 +125,7 @@ Future<void> phoneStateBackgroundCallbackHandler(
       log('Outgoing call start, $number, duration: $duration s');
       break;
     case PhoneStateBackgroundEvent.outgoingend:
-      FlutterOverlayWindow.showOverlay(
-        enableDrag: true,
-        overlayTitle: "X-SLAYER",
-        overlayContent: 'Overlay Enabled',
-        flag: OverlayFlag.defaultFlag,
-        visibility: NotificationVisibility.visibilityPublic,
-        positionGravity: PositionGravity.auto,
-        height: 400,
-        width: WindowSize.matchParent,
-      );
+     _showSystemAlertWindow(number);
       debugPrint('Outgoing call ended, $number, duration: $duration s');
       log('Outgoing call ended, $number, duration: $duration s');
       break;
@@ -158,33 +133,44 @@ Future<void> phoneStateBackgroundCallbackHandler(
 }
 
 void _showSystemAlertWindow(String number) {
-  SystemAlertWindow.showSystemWindow(
-    height: 200,
-    header: SystemWindowHeader(
-      title: SystemWindowText(
-        text: "$number",
-      ),
-      subTitle: SystemWindowText(text: "Is this Call Important ?"),
-      decoration: SystemWindowDecoration(
-        startColor: Colors.transparent,
-        endColor: Colors.transparent,
-      ),
-    ),
-    body: SystemWindowBody(rows: []),
-    footer: SystemWindowFooter(
-      buttons: [
-        SystemWindowButton(
-          text: SystemWindowText(text: "Close"),
-          tag: 'close',
-        ),
-        SystemWindowButton(
-          text: SystemWindowText(text: "Yes"),
-          tag: 'yes',
-        ),
-      ],
-    ),
-    prefMode: SystemWindowPrefMode.OVERLAY,
-  );
+  // SystemAlertWindow.showSystemWindow(
+  //   height: 200,
+  //   header: SystemWindowHeader(
+  //     title: SystemWindowText(
+  //       text: "$number",
+  //     ),
+  //     subTitle: SystemWindowText(text: "Is this Call Important ?"),
+  //     decoration: SystemWindowDecoration(
+  //       startColor: Colors.transparent,
+  //       endColor: Colors.transparent,
+  //     ),
+  //   ),
+  //   body: SystemWindowBody(rows: []),
+  //   footer: SystemWindowFooter(
+  //     buttons: [
+  //       SystemWindowButton(
+  //         text: SystemWindowText(text: "Close"),
+  //         tag: 'close',
+  //       ),
+  //       SystemWindowButton(
+  //         text: SystemWindowText(text: "Yes"),
+  //         tag: 'yes',
+  //       ),
+  //     ],
+  //   ),
+  //   prefMode: SystemWindowPrefMode.OVERLAY,
+  // );
+  FlutterOverlayWindow.showOverlay(
+        enableDrag: true,
+        overlayTitle: "This is Example",
+        overlayContent: 'Overlay Enabled',
+        flag: OverlayFlag.defaultFlag,
+        visibility: NotificationVisibility.visibilityPublic,
+        positionGravity: PositionGravity.auto,
+        height: 400 ,
+        width: WindowSize.matchParent,
+      );
+  // FlutterOverlayWindow.showOverlay();
 }
 
 class MyApp extends StatelessWidget {
@@ -253,13 +239,7 @@ class _MyHomePageState extends State<MyHomePage> {
             const SizedBox(
               height: 20,
             ),
-            // SizedBox(
-            //   width: 180,
-            //   child: ElevatedButton(
-            //     onPressed: () => _requestPermission(),
-            //     child: const Text('Check Permission'),
-            //   ),
-            // ),
+           
             // Padding(
             //   padding: const EdgeInsets.symmetric(vertical: 20),
             //   child: SizedBox(
@@ -314,3 +294,5 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 // GPT Organized
+
+
