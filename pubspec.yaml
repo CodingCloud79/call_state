@@ -41,6 +41,7 @@ dependencies:
   phone_state_background: ^0.0.4
   url_launcher: ^6.2.5
   device_apps: ^2.2.0
+  flutter_overlay_window: ^0.4.3
 
 
 dev_dependencies:

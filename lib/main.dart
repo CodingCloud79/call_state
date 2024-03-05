@@ -1,10 +1,51 @@
+// Flutter_overlay_window_example
+// import 'package:flutter/material.dart';
+// import 'fow.dart';
+// import 'overlays/true_caller_overlay.dart';
+
+// void main() {
+//   WidgetsFlutterBinding.ensureInitialized();
+//   runApp(const MyApp());
+// }
+
+// @pragma("vm:entry-point")
+// void overlayMain() {
+//   WidgetsFlutterBinding.ensureInitialized();
+//   runApp(
+//     const MaterialApp(
+//       debugShowCheckedModeBanner: false,
+//       home: TrueCallerOverlay(),
+//     ),
+//   );
+// }
+
+// class MyApp extends StatefulWidget {
+//   const MyApp({Key? key}) : super(key: key);
+
+//   @override
+//   State<MyApp> createState() => _MyAppState();
+// }
+
+// class _MyAppState extends State<MyApp> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return const MaterialApp(
+//       debugShowCheckedModeBanner: false,
+//       home: HomePage(),
+//     );
+//   }
+// }
+
 import 'dart:async';
 import 'dart:developer';
 import 'package:flutter/material.dart';
+import 'package:flutter_overlay_window/flutter_overlay_window.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:phone_state_background/phone_state_background.dart';
 import 'package:system_alert_window/system_alert_window.dart';
 import 'package:device_apps/device_apps.dart';
+
+import 'overlays/true_caller_overlay.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -12,6 +53,17 @@ Future<void> main() async {
   await _initializeServices();
 
   runApp(const MyApp());
+}
+
+@pragma("vm:entry-point")
+void overlayMain() {
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(
+    const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: TrueCallerOverlay(),
+    ),
+  );
 }
 
 void callBack(tag) async {
@@ -53,7 +105,16 @@ Future<void> phoneStateBackgroundCallbackHandler(
       log('Incoming call start, $number, duration: $duration s');
       break;
     case PhoneStateBackgroundEvent.incomingmissed:
-      _showSystemAlertWindow(number);
+      FlutterOverlayWindow.showOverlay(
+        enableDrag: true,
+        overlayTitle: "X-SLAYER",
+        overlayContent: 'Overlay Enabled',
+        flag: OverlayFlag.defaultFlag,
+        visibility: NotificationVisibility.visibilityPublic,
+        positionGravity: PositionGravity.auto,
+        height: 400,
+        width: WindowSize.matchParent,
+      );
       debugPrint('Incoming call missed, $number, duration: $duration s');
       log('Incoming call missed, $number, duration: $duration s');
       break;
@@ -62,7 +123,16 @@ Future<void> phoneStateBackgroundCallbackHandler(
       log('Incoming call received, $number, duration: $duration s');
       break;
     case PhoneStateBackgroundEvent.incomingend:
-      _showSystemAlertWindow(number);
+      FlutterOverlayWindow.showOverlay(
+        enableDrag: true,
+        overlayTitle: "X-SLAYER",
+        overlayContent: 'Overlay Enabled',
+        flag: OverlayFlag.defaultFlag,
+        visibility: NotificationVisibility.visibilityPublic,
+        positionGravity: PositionGravity.auto,
+        height: 400,
+        width: WindowSize.matchParent,
+      );
       debugPrint('Incoming call ended, $number, duration $duration s');
       log('Incoming call ended, $number, duration $duration s');
       break;
@@ -71,7 +141,16 @@ Future<void> phoneStateBackgroundCallbackHandler(
       log('Outgoing call start, $number, duration: $duration s');
       break;
     case PhoneStateBackgroundEvent.outgoingend:
-      _showSystemAlertWindow(number);
+      FlutterOverlayWindow.showOverlay(
+        enableDrag: true,
+        overlayTitle: "X-SLAYER",
+        overlayContent: 'Overlay Enabled',
+        flag: OverlayFlag.defaultFlag,
+        visibility: NotificationVisibility.visibilityPublic,
+        positionGravity: PositionGravity.auto,
+        height: 400,
+        width: WindowSize.matchParent,
+      );
       debugPrint('Outgoing call ended, $number, duration: $duration s');
       log('Outgoing call ended, $number, duration: $duration s');
       break;
@@ -120,6 +199,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blueGrey,
       ),
       home: const MyHomePage(title: 'Phone State Background'),
+      // home: const HomePage(),
     );
   }
 }
@@ -143,6 +223,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Future<void> _hasPermission() async {
     final permission = await PhoneStateBackground.checkPermission();
+
     setState(() => hasPermission = permission);
   }
 
